@@ -4,12 +4,13 @@
 <h1>Rock List</h1>
 
 {% for rock in rocks %}
-<div class="col-7  mx-auto py-2">
-    <div class="card lifted bg-dark">
-        <ul class="list-group list-group-flush bg-light">
-            <li class="list-group-item light-background-2"><small class="dark-text">{{ rock.name }}</small></li>
-            <li class="list-group-item bg-dark"><small class="light-text">Breed: {{ rock.category }}</small></li>
-            <li class="list-group-item bg-dark"><small class="light-text">Description: {{ rock.description }}</small></li>
+<div class="col-7 mx-auto my-5">
+    <div class="card lifted ">
+        <ul class="list-group list-group-flush base-text">
+            <a class="nav-link light-text" aria-current="page" href="{% url 'detail' rock.id %}">Display this Rock</a>
+            <li class="list-group-item "><small class="base-text">{{ rock.name }}</small></li>
+            <li class="list-group-item "><small class="">Breed: {{ rock.category }}</small></li>
+            <li class="list-group-item "><small class="light-text">Description: {{ rock.description }}</small></li>
             {% if rock.grams > 1 %}
             <li class="list-group-item bg-dark"><small class="light-text">Weight: {{ rock.grams }} grams</small></li>
             {% else %}

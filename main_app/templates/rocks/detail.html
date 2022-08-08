@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Rock Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ rock.name }}</span>
+    <p>Breed: {{ rock.category }}</p>
+    <p>Description: {{ rock.description|linebreaks }}</p>
+    {% if rock.description > 0 %}
+      <p>Age: {{ rock.grams }}</p>
+    {% else %}
+      <p>Age: Kitten</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -20,10 +20,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link light-text" aria-current="page" href="/rocks">Display Rocks</a>
+              <a class="nav-link light-text" aria-current="page" href="{% url 'rocks_create' %}">Create Rocks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link light-text" href="/what">About</a>
+              <a class="nav-link light-text" aria-current="page" href="{% url 'index' %}">Display Rocks</a>
+            </li>
+            <li class="nav-item">
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link light-text" href="{% url 'what' %}}">About</a>
             </li>
             
           </ul>

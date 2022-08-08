@@ -1,26 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-class Rock:  # Note that parens are optional if not inheriting from another class
-  def __init__(self, name, category, description, grams):
-    self.name = name
-    self.category = category
-    self.description = description
-    self.grams = grams
-
-rocks = [
-  Rock('Granny', 'Igneous', 'super old granite rock, set in her ways, stubborn but cares about the young rocks', 35),
-  Rock('Rockette', 'Metamorphic', 'workhorse, used to be shale, now living the slate life, works hard and parties hard', 47),
-  Rock('Carl', 'Sedimentary', 'very bland limestone rock, unstable personality, doesn\'t like other rocks', 22),
-]
-
+from django.views.generic.edit import CreateView
+from main_app.models import Rock
 
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
 
 def what(request):
-    return render(request, 'what.html')
+  return render(request, 'what.html')
 
 def rocks_index(request):
-    return render(request, 'rocks/index.html', {'rocks' : rocks})
+  rocks = Rock.objects.all()
+  return render(request, 'rocks/index.html', {'rocks' : rocks})
+
+def rock_detail(request, rock_id):
+  rock = Rock.objects.get(id=rock_id)
+  return render(request, 'rocks/detail.html', { 'rock': rock})
+
+def rock_create(request, rock_id):
+  rock = Rock.objects.create()
+  return render(request, 'rocks/detail.html', { 'rock': rock})
+
+class RockCreate(CreateView):
+  model = Rock
+  fields = '__all__'
+  success_url = '/rocks/'     
