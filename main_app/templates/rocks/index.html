@@ -4,18 +4,20 @@
 <h1>Rock List</h1>
 
 {% for rock in rocks %}
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ rock.name }}</span>
-      <p>Breed: {{ rock.category }}</p>
-      <p>Description: {{ rock.description }}</p>
-      {% if rock.grams > 1 %}
-        <p>Weight: {{ rock.grams }} grams</p>
-      {% else %}
-        <p>Weight: dust</p>
-      {% endif %}
+<div class="col-7  mx-auto py-2">
+    <div class="card lifted bg-dark">
+        <ul class="list-group list-group-flush bg-light">
+            <li class="list-group-item light-background-2"><small class="dark-text">{{ rock.name }}</small></li>
+            <li class="list-group-item bg-dark"><small class="light-text">Breed: {{ rock.category }}</small></li>
+            <li class="list-group-item bg-dark"><small class="light-text">Description: {{ rock.description }}</small></li>
+            {% if rock.grams > 1 %}
+            <li class="list-group-item bg-dark"><small class="light-text">Weight: {{ rock.grams }} grams</small></li>
+            {% else %}
+            <li class="list-group-item bg-dark"><small class="light-text">Weight: dust</small></li>
+            {% endif %}
+        </ul>
     </div>
-  </div>
+</div>
 {% endfor %}
 
 {% endblock %}
