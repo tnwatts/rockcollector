@@ -1,19 +1,98 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Rock Details</h1>
+<h1 class="lifted lighten-area col-3 my-4 py-2">Rock Details</h1>
+<div class="base-background col-10 rounded-3 mx-auto " style="min-width: 600px">
+<div class="card d-flex flex-row mx-auto lifted light-text justify-content-center mb-5 lighten-area border border-3 border-primary p-1 rounded-3">
+    <!-- <div class="col-md-8 light-background light-text"> -->
+      <div class="col-12 border border-warning rounded-2 border-1 bg-warning d-flex min-width-540">  
+        <ul class="  dark-background light-text p-2 pb-2 list-group list-group-flush justify-content-center  border border-warning border-1 rounded-start">
+          <!-- <div class='my-2 col-6 mx-auto bg-success border rounded-2 border-1 border-warning text-center text-uppercase'><h5 class="lighten-area m-0 darkest-text">{{ rock.name }}</h5></div> -->
+          <li class="list-group-item off-base-background rounded-1 "><small class="darkest-text lighten-area mx-1 border border-1 border-warning ">Breed: </small><small class="border border-1 border-warning lighten-area dark-text text-uppercase">{{ rock.category }}</small></li>
+          <li class="list-group-item off-base-background dark-text rounded-1"><p class="darkest-text border border-1 border-warning  lighten-area ">Description: <br><br><small class="dark-text">{{ rock.description }}</small></li>
+            {% if rock.grams > 1 %}
+            <li class="list-group-item off-base-background dark-text rounded-1 "><small class="darkest-text lighten-area mx-1 justify-self-start border border-1 border-warning ">Weight: </small><small class="lighten-area border border-1 border-warning ">{{ rock.grams }} grams</small></li>
+            {% else %}
+            <li class="list-group-item off-base-dark "><small class="darkest-text lighten-area mx-1">Weight: </small><small class="lighten-area">dust</small></li>
+            {% endif %}
+            <div class="base-background p-1  rounded-1 ">
+              <a href="{% url 'rocks_update' rock.id %}" class="btn btn-primary btn-outline-warning">Edit</a>
+              <a href="{% url 'rocks_delete' rock.id %}"" class="btn btn-primary btn-outline-warning">Delete</a>
+            </div>
+            <div class="col off-base-background dark-text my-3 rounded-3 p-1">
+              <!-- new code below -->
+              <form method="POST" action="{% url 'add_cleaning' rock.id %}" class="d-flex flex-row mx-auto darkest-text lighten-area">
+                {% csrf_token %}
+                <div class="col-9 ">
+    
+                  {{ cleaning_form.as_p }}
+                  <input type="submit" class="btn btn-primary btn-outline btn-outline-warning " value="Add Cleaning">
+                </div>
+                </form>
+              <!-- new code above -->
+              <table class="striped">
+              </table>
+            </div>
+          </ul>
+        <!-- </div> -->
+        <div class="col fill border border-warning rounded-end" style='background-image: url("https://www.thoughtco.com/thmb/QNyFvhrjdRz4h4kdeXSIzF67shA=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Layers_of_sedimentary_rock_in_Makhtesh_Ramon_50754-3a40a0968fea41718b339824873ef3e9.jpg")'>
+          <div class="rounded-3 p-0 m-0">
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ rock.name }}</span>
-    <p>Breed: {{ rock.category }}</p>
-    <p>Description: {{ rock.description|linebreaks }}</p>
-    {% if rock.description > 0 %}
-      <p>Age: {{ rock.grams }}</p>
-    {% else %}
-      <p>Age: Kitten</p>
-    {% endif %}
-  </div>
+            <table class="table  table-hover   lighten-area darkest-text  ">
+              <thead class="lighten-area rounded-3 ">
+                <tr class=""><th scope="col">Date</th><th scope="col">Cleaning</th></tr>
+              </thead>
+            <tbody class="table-group-divider ">
+              {% for cleaning in rock.cleaning_set.all %}
+              <tr class=" ">
+                <td scope="row">{{cleaning.date}}</td>
+                <td class="">{{cleaning.get_soap_display}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </div>
+        <!-- </div> -->
+      </div>
 </div>
 
+<!-- Insert photo markup below this comment -->
+{% for photo in rock.photo_set.all %}
+  <img class="responsive-img card-panel" src="{{photo.url}}">
+{% empty %}
+  <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endfor %}
+
+<!-- new code below -->
+<form action="{% url 'add_photo' rock.id %}" enctype="multipart/form-data" method="POST"  class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
+<!-- <div class="container">
+  <div class="col-6">
+    <h3>{{ rock.name }}'s Toys</h3>
+    {% if rock.dirt.count %}
+      {% for dirt in dirt.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="color: {{ dirt.color }}">{{ dirt.color }}</span> {{ dirt.consitstency }}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Toys :(</h5>
+    {% endif %}
+  </div> -->
+  <!-- Available toys will come after this line -->
+</div>
+</div> 
+<script>
+  const dateEl = document.getElementById('id_date');
+  dateEl.setAttribute('type', 'date');
+</script>
 {% endblock %}

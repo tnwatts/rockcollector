@@ -11,25 +11,25 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body class="light-background">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark  dark-background">
       <div class="container-fluid">
-        <a class="navbar-brand light-text" href="/">ROCKS!</a>
+        <a class="navbar-brand mid-text" href="/">ROCKS!</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link light-text" aria-current="page" href="{% url 'rocks_create' %}">Create Rocks</a>
+              <a class="nav-link mid-text" aria-current="page" href="{% url 'rocks_create' %}">Create Rocks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link light-text" aria-current="page" href="{% url 'index' %}">Display Rocks</a>
+              <a class="nav-link mid-text" aria-current="page" href="{% url 'index' %}">Display Rocks</a>
             </li>
             <li class="nav-item">
               
             </li>
             <li class="nav-item">
-              <a class="nav-link light-text" href="{% url 'what' %}}">About</a>
+              <a class="nav-link mid-text" href="{% url 'what' %}}">About</a>
             </li>
             
           </ul>
@@ -42,8 +42,8 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="navbar bg-dark">
-    <div class="container text-light">All Rights Reserved, &copy; 2021 Rock Collector &nbsp;</div>
+  <footer class="navbar dark-background">
+    <div class="container mid-text">All Rights Reserved, &copy; 2021 Rock Collector &nbsp;</div>
   </footer>
 </body>
 </html>

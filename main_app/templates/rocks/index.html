@@ -1,24 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Rock List</h1>
+<h1 class="lifted lighten-area col-2 my-3 py-2">Rock List</h1>
 
 {% for rock in rocks %}
-<div class="col-7 mx-auto my-5">
-    <div class="card lifted ">
-        <ul class="list-group list-group-flush base-text">
-            <a class="nav-link light-text" aria-current="page" href="{% url 'detail' rock.id %}">Display this Rock</a>
-            <li class="list-group-item "><small class="base-text">{{ rock.name }}</small></li>
-            <li class="list-group-item "><small class="">Breed: {{ rock.category }}</small></li>
-            <li class="list-group-item "><small class="light-text">Description: {{ rock.description }}</small></li>
+
+<div class="base-background col-7 rounded-3 mx-auto mb-2" style="min-width: 600px">
+<div class="card d-flex flex-row mx-auto lifted light-text justify-content-center mb-1 lighten-area border border-3 border-primary p-1 rounded-3">
+    <!-- <div class="col-md-8 light-background light-text"> -->
+      <div class="col-12 rounded-2 border-1 d-flex min-width-540">  
+        <ul class="col-12 card dark-background light-text p-2 pb-2 list-group list-group-flush  border-1 rounded-2">
+          <div class='my-2 mx-auto bg-success  border rounded-2 border-1 border-warning text-center text-uppercase'><h5 class="lighten-area m-0 darkest-text">{{ rock.name }}</h5></div>
+          <li class="list-group-item off-base-background rounded-1 border-dark border border-2"><small class="darkest-text lighten-area mx-1 border border-1 border-warning ">Breed: </small><small class="border border-1 border-warning lighten-area dark-text text-uppercase">{{ rock.category }}</small></li>
+          <li class="list-group-item off-base-background dark-text rounded-1 border-dark border border-2"><p class="darkest-text border border-1 border-warning  lighten-area ">Description: <br><br><small class="dark-text">{{ rock.description }}</small></li>
             {% if rock.grams > 1 %}
-            <li class="list-group-item bg-dark"><small class="light-text">Weight: {{ rock.grams }} grams</small></li>
+            <li class="list-group-item off-base-background dark-text rounded-1 border-dark border border-2"><small class="darkest-text lighten-area mx-1 justify-self-start border border-1 border-warning ">Weight: </small><small class="lighten-area border border-1 border-warning ">{{ rock.grams }} grams</small></li>
             {% else %}
-            <li class="list-group-item bg-dark"><small class="light-text">Weight: dust</small></li>
+            <li class="list-group-item off-base-dark border-dark border border-2"><small class="darkest-text lighten-area mx-1">Weight: </small><small class="lighten-area">dust</small></li>
             {% endif %}
-        </ul>
-    </div>
+            <div class="base-background p-1  rounded-1 border-dark border border-2">
+                <a href="{% url 'detail' rock.id %}" class="btn btn-primary btn-outline-warning">View</a>
+                <a href="{% url 'rocks_update' rock.id %}" class="btn btn-primary btn-outline-warning">Edit</a>
+                <a href="{% url 'rocks_delete' rock.id %}"" class="btn btn-primary btn-outline-warning">Delete</a>
+            </div>
+          </ul>
+     
+      </div>
 </div>
+</div> 
+  
 {% endfor %}
 
 {% endblock %}
