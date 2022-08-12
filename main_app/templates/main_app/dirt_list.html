@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Dirt List</h1>
+
+{% for dirt in dirt_list %}
+  <a href="{% url 'dirt_detail' dirt.id %}">
+    <div class="card">
+        <div class="card-body">
+            <span class="card-header">{{ dirt.consistency }}</span>
+            <p class="card-text">Color: {{ dirt.color }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

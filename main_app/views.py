@@ -58,23 +58,23 @@ class DirtList(ListView):
   model = Dirt
 
 
-class DirtList(DetailView):
+class DirtDetail(DetailView):
   model = Dirt
 
 
-class DirtList(CreateView):
+class DirtCreate(CreateView):
   model = Dirt
   fields = '__all__'
 
 
-class DirtList(UpdateView):
+class DirtUpdate(UpdateView):
   model = Dirt
-  fields = ['name', 'color']
+  fields = ['consistency', 'color']
 
 
-class DirtList(DeleteView):
+class DirtDelete(DeleteView):
   model = Dirt
-  success_url = '/toys/'
+  success_url = '/dirt/'
 
 def assoc_dirt(request, rock_id, dirt_id):
   rock = Rock.objects.get(id=rock_id)

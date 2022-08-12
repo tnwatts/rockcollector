@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Dirt Details</h1>
+
+<div class="col-8">
+    <div class="card">
+        <div class="card-body">
+            <span class="card-header">{{ dirt.consistency }}</span>
+            <p class="card-text">Color: {{ dirt.color }}</p>
+        </div>
+        <div class="card-text">
+            <a href="{% url 'dirt_update' dirt.id %}">Edit</a>
+            <a href="{% url 'dirt_delete' dirt.id %}">Delete</a>
+          </div>
+    </div>
+</div>
+{% endblock %}

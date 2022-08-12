@@ -69,30 +69,57 @@
     {% csrf_token %}
     <input type="file" name="photo-file">
     <br><br>
-    <input type="submit" class="btn" value="Upload Photo">
+    <input type="submit" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning" value="Upload Photo">
 </form>
-<!-- <div class="container">
+<div class="container">
   <div class="col-6">
-    <h3>{{ rock.name }}'s Toys</h3>
+    <h3>{{ rock.name }}'s dirt types:</h3>
     {% if rock.dirt.count %}
-      {% for dirt in dirt.all %}
+      {% for dirt in rock.dirt.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
               A <span style="color: {{ dirt.color }}">{{ dirt.color }}</span> {{ dirt.consitstency }}
             </span>
           </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_dirt' rock.id dirt.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning">Remove</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Toys :(</h5>
+      <h5>This rock has no dirt to play with.</h5>
     {% endif %}
-  </div> -->
-  <!-- Available toys will come after this line -->
+  </div>
+  <div class="col-6">
+    <h3>Available Dirt</h3>
+    {% if dirt.count %}
+      {% for dirt in dirt.all %}
+        <div class="card">
+          <div class="card-header">
+              A <span style="color: {{ dirt.color }}">{{ dirt.color }}</span> {{ dirt.consistency }}
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_dirt' rock.id dirt.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{rock.name}} Already Has All Dirt Available</h5>
+    {% endif %}
+  </div>
+ 
 </div>
 </div> 
 <script>
   const dateEl = document.getElementById('id_date');
   dateEl.setAttribute('type', 'date');
+
 </script>
 {% endblock %}

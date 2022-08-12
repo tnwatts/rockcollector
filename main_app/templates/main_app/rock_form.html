@@ -7,17 +7,22 @@
   <h1>Edit <span class="text-dark">{{rock.name}}</span></h1>
 </div>
 {% else %}
-<h1>Add Rock</h1>
+<h1 class="dark-text">Add Rock</h1>
   {% endif %}
 
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
-  <form action="" method="POST" class="row g-3">
+  <form action="" method="POST" class="col-6">
     {% csrf_token %}
-    <table>
-      <td class="'col">Name</td>
-      <td class="'col">Category</td>
+    <table class="col-11 rounded-2 p-1 m-2  off-base-background lifted">
       {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit!" class="btn btn-primary btn-outline btn-outline-warning">
+    <input type="submit" value="Submit!" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning">
   </form>
+
+<script>
+  const ths = document.querySelectorAll('tr');
+  ths.forEach(function(el, idx){
+    el.setAttribute('class', 'darkest-text')
+  })
+</script>
 {% endblock %}

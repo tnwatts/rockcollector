@@ -16,13 +16,13 @@ SOAPS = (
 
 # Create your models here.
 class Dirt(models.Model):
-    consistency = models.CharField(max_length=10)
+    consistency = models.CharField(max_length=20)
     color = models.CharField(max_length=20)
     def __str__(self):
-        return self.name
-        
+        return f"{self.consistency} {self.color}"
     def get_absolute_url(self):
-        return reverse('toys_detail', kwargs={'pk': self.id})
+        return reverse('dirt_detail', kwargs={'pk': self.id})
+
 
 class Rock(models.Model):
     name = models.CharField(max_length=100)
@@ -32,10 +32,8 @@ class Rock(models.Model):
     dirt = models.ManyToManyField(Dirt)
     def __str__(self):
         return f'{self.name} ({self.id})'
-
     def get_absolute_url(self):
         return reverse('detail', kwargs={'rock_id': self.id})
-
     def cleaned_for_today(self):
         return self.cleaning_set.filter(date=date.today()).count() >=len(SOAPS)
 
@@ -48,7 +46,6 @@ class Cleaning(models.Model):
         choices=SOAPS,
         default=SOAPS[0][0]
     )
-
     rock = models.ForeignKey(Rock, on_delete=models.CASCADE)
     class Meta:
         ordering = ['-date']
