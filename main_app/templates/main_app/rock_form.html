@@ -11,18 +11,39 @@
   {% endif %}
 
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
-  <form action="" method="POST" class="col-6">
-    {% csrf_token %}
-    <table class="col-11 rounded-2 p-1 m-2  off-base-background lifted">
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning">
-  </form>
+  
+
+    <form action="" method="POST" class="mx-auto col-8 off-base-background lifted rounded-3">
+      {% csrf_token %}
+      <!-- <table class="table input-group rounded-2 p-1 form-control off-base-background lifted " aria-describedby="button-addon1"> -->
+        <table class="table table-border rounded-3">
+          {{ form.as_table }}
+
+        </table>
+        <input type="submit" value="Submit!" class="btn px-1 mb-5 mx-2 btn-primary btn-outline btn-outline-warning">
+      </form>
+
 
 <script>
-  const ths = document.querySelectorAll('tr');
-  ths.forEach(function(el, idx){
-    el.setAttribute('class', 'darkest-text')
+  const labels = document.querySelectorAll('th');
+  const inputs = document.querySelectorAll('input');
+  const trs = document.querySelectorAll('tr');
+  const tb = document.querySelector('tbody');
+  tb.setAttribute("class", "col off-base-background rounded-2")
+  document.querySelector('textarea').setAttribute('class', "form-control")
+  
+  inputs.forEach(function(el,idx){
+    el.setAttribute('class', ' form-control')
+  })
+  
+  trs.forEach(function(el,idx){
+    el.setAttribute('class', 'input-group col-12')
+    el.firstElementChild.setAttribute('class', 'input-group-text')
+    
+  })
+  labels.forEach(function(el, idx){
+    el.setAttribute('class', 'input-group-text')
+    // el.lastElementChild.lastElementChild.setAttribute("aria-describedby", "button-addon1")
   })
 </script>
 {% endblock %}

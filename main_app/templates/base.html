@@ -19,11 +19,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'rocks_create' %}">Create Rocks</a></li>
-          <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'index' %}">Display all Rocks</a></li>
-          <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'dirt_index' %}">Display all Dirt Types</a></li>
-          <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'dirt_create' %}">Create a Dirt type</a></li>
-          <li class="nav-item"><a class="nav-link mid-text" href="{% url 'what' %}}">About</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'rocks_create' %}">Create Rocks</a></li>
+            <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'index' %}">Display all Rocks</a></li>
+            <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'dirt_index' %}">Display all Dirt Types</a></li>
+            <li class="nav-item"><a class="nav-link mid-text" aria-current="page" href="{% url 'dirt_create' %}">Create a Dirt type</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
+            <li class="nav-item"><a class="nav-link mid-text" href="{% url 'what' %}">About</a></li>
         </ul>
       </div>
     </div>

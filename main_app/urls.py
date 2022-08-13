@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
+from django.conf.urls import include
+
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('what', views.what, name='what'),
+    path('what/', views.what, name='what'),
     path('rocks/', views.rocks_index, name='index'),
     path('rocks/<int:rock_id>/', views.rock_detail, name= 'detail'),
     path('rocks/create/', views.RockCreate.as_view(), name='rocks_create'),
@@ -17,6 +19,8 @@ urlpatterns = [
     path('dirt/<int:pk>/', views.DirtDetail.as_view(), name='dirt_detail'),
     path('dirt/create/', views.DirtCreate.as_view(), name='dirt_create'),
     path('dirt/<int:pk>/update/', views.DirtUpdate.as_view(), name='dirt_update'),
-    path('dirt/<int:pk>/delete/', views.DirtDelete.as_view(), name='dirt_delete'),    
+    path('dirt/<int:pk>/delete/', views.DirtDelete.as_view(), name='dirt_delete'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
 
